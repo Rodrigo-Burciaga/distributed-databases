@@ -7,8 +7,6 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="css/estilos.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Sneakerland | Tus Sneakers hablan por ti</title>
 </head>
 <body>
@@ -25,10 +23,62 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="home_administrador.php">Home</a></li>
-      <li><a href="registroempleado.php">Registrar Empleado</a></li>
-      <li><a href="registroproducto.php">Registrar Producto</a></li>
-      <li><a href="gestionempleado.php">Gestion de Empleados</a></li>
-	  <li><a href="gestionproducto.php">Gestion de Productos</a></li>
+        <li>
+        <form class="navbar-form" style="border: 0">
+          <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Registrar
+          <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="registroempleado.php">Empleados</a></li>
+            <li class="divider"><li>
+            <li><a href="registroproducto.php">Productos</a></li>
+            <li class="divider"><li>
+            <li ><a href="registrosucursal.php">Sucursales</a></li>
+          </ul>
+        </div>
+      </form>
+     </li>
+     <li>
+        <form class="navbar-form" style="border: 0">
+          <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Gestionar
+          <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="gestionempleado.php">Empleados</a></li>
+            <li class="divider"><li>
+            <li><a href="gestionproducto.php">Productos</a></li>
+            <li class="divider"><li>
+            <li ><a href="registrosucursal.php">Sucursales</a></li>
+          </ul>
+        </div>
+      </form>
+     </li>
+     <li>
+        <form class="navbar-form" style="border: 0">
+          <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Consultar
+          <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="consultarempleado.php">Empleados</a></li>
+            <li class="divider"><li>
+            <li><a href="consultarproducto.php">Productos</a></li>
+            <li class="divider"><li>
+            <li ><a href="consultarsucursal.php">Sucursales</a></li>
+          </ul>
+        </div>
+      </form>
+     </li>
+
+
+
+      
+
+
+
+
     </ul>
   </div>
 </nav>
@@ -49,7 +99,7 @@
 </div>
 </div>
 
-<script src="jquery-3.1.1.js"></script>
+<script src="js/jquery-3.1.1.js"></script>
 <script src="js/bootstrap.js"></script>
 
 </body></html>

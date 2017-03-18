@@ -37,6 +37,7 @@ include "conection/conexion.php";
 
       switch ($row["id_nivel_usuario"]) {
           case 1:
+              desconectar();
               header("location: home_administrador.php");
               break;
           case 2:
