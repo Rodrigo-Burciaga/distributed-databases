@@ -405,7 +405,7 @@ CREATE TABLE `talla` (
 
 LOCK TABLES `talla` WRITE;
 /*!40000 ALTER TABLE `talla` DISABLE KEYS */;
-INSERT INTO `talla` VALUES (1,'Chica'),(2,'Mediana'),(3,'Grande'),(4,'Unitalla'),(5,'15'),(6,'16'),(7,'17'),(8,'18'),(9,'19'),(10,'20'),(11,'21'),(12,'22'),(13,'23'),(14,'24'),(15,'25'),(16,'26'),(17,'27'),(18,'28'),(19,'29'),(20,'30'),(21,'31'),(22,'32'),(23,'33'),(24,'Otro'),(25,'unitalla');
+INSERT INTO `talla` VALUES (1,'Chica'),(2,'Mediana'),(3,'Grande'),(4,'Unitalla'),(5,'15'),(6,'16'),(7,'17'),(8,'18'),(9,'19'),(10,'20'),(11,'21'),(12,'22'),(13,'23'),(14,'24'),(15,'25'),(16,'26'),(17,'27'),(18,'28'),(19,'29'),(20,'30'),(21,'31'),(22,'32'),(23,'33'),(24,'Otro');
 /*!40000 ALTER TABLE `talla` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -489,7 +489,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,2,'nuria_12314@hotmail.com','nuria1',1),(2,1,'brendaloka_1990@hotmail.com','bren1',2),(3,2,'erickson_1990@hotmail.com','erick1',3),(4,2,'pedro_cruz@hotmail.com','pedro1',4),(5,2,'yamil_odel@hotmail.com','yam1',5),(6,3,'blanca_lisf@gmail.com','blanc1',6),(7,2,'lind_fue1@hotmail.com','linda1',7),(8,2,'vico_12334@hotmail.com','victor2',8),(9,3,'arturopache@hotmail.com','arturo1',9),(10,2,'salsa_eduardo@hotmail.com','eduardo1',10),(11,3,'oliver_atom@gmailcom','oliver1',11),(12,2,'fer_gomez123@hotmail.com','fernando1',12),(13,3,'agus_uri_arv@hotmail.com','agusti1',13),(14,2,'jose_alejo@hotmail.com','jose1',14),(15,2,'albert_baut@hotmail.com','alberto1',15),(16,3,'pancho_xavi@hotmail.com','francisco1',16),(17,2,'jose_antony12@hotmail.com','antonio1',17),(18,2,'michelle_hugo1@hotmail.com','hugo1',18),(19,2,'eduardo_fragoso@gmail.com','eduardo1',19),(20,2,'shamid_miguel@hotmail.com','miguel1',20);
+INSERT INTO `usuario` VALUES (1,3,'nuria_12314@hotmail.com','nuria1',1),(2,1,'brendaloka_1990@hotmail.com','bren1',2),(3,3,'erickson_1990@hotmail.com','erick1',3),(4,2,'pedro_cruz@hotmail.com','pedro1',4),(5,3,'yamil_odel@hotmail.com','yam1',5),(6,3,'blanca_lisf@gmail.com','blanc1',6),(7,3,'lind_fue1@hotmail.com','linda1',7),(8,3,'vico_12334@hotmail.com','victor2',8),(9,2,'arturopache@hotmail.com','arturo1',9),(10,3,'salsa_eduardo@hotmail.com','eduardo1',10),(11,3,'oliver_atom@gmailcom','oliver1',11),(12,3,'fer_gomez123@hotmail.com','fernando1',12),(13,3,'agus_uri_arv@hotmail.com','agusti1',13),(14,3,'jose_alejo@hotmail.com','jose1',14),(15,2,'albert_baut@hotmail.com','alberto1',15),(16,3,'pancho_xavi@hotmail.com','francisco1',16),(17,3,'jose_antony12@hotmail.com','antonio1',17),(18,3,'michelle_hugo1@hotmail.com','hugo1',18),(19,3,'eduardo_fragoso@gmail.com','eduardo1',19),(20,3,'shamid_miguel@hotmail.com','miguel1',20);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -513,7 +513,7 @@ CREATE TABLE `usuario_nivel` (
 
 LOCK TABLES `usuario_nivel` WRITE;
 /*!40000 ALTER TABLE `usuario_nivel` DISABLE KEYS */;
-INSERT INTO `usuario_nivel` VALUES (1,'Administrador'),(2,'2'),(3,'3');
+INSERT INTO `usuario_nivel` VALUES (1,'Administrador'),(2,'Gerente'),(3,'Asesor Ventas');
 /*!40000 ALTER TABLE `usuario_nivel` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -526,4 +526,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-18 13:48:14
+-- Dump completed on 2017-03-18 15:46:29
