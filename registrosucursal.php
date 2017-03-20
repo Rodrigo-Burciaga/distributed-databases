@@ -117,6 +117,9 @@
           <!--- se van a traer los empleados desde la base de datos -->
         </select>
       </div>
+
+
+      <button type="submit" class="btn btn-danger my-btn btn-block"><span class="glyphicon glyphicon-off"></span> Registro</button>
     
 
      </div>

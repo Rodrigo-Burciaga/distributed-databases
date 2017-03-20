@@ -5,6 +5,7 @@ include "conection/conexion.php";
 
 
 
+
  if($_SERVER["REQUEST_METHOD"] == "POST") {
 
   conectar();
@@ -37,17 +38,21 @@ include "conection/conexion.php";
 
       switch ($row["id_nivel_usuario"]) {
           case 1:
-              desconectar();
+              //desconectar();
               header("location: home_administrador.php");
+	            desconectar();
               break;
           case 2:
-               header("location: home1.html");
+               header("location: home_gerente.php");
+               desconectar();
               break;
           case 3:
-               header("location: home2.html");
+               header("location: home_asesor.php");
+               desconectar();
               break;
           default:
-               header("location: home3.html");
+               header("location: index.php");
+               desconectar();
       }    
     }
          
@@ -106,7 +111,7 @@ include "conection/conexion.php";
 	</div>
 </div>
 
-<script src="jquery-3.1.1.js"></script>
+<script src="js/jquery-3.1.1.js"></script>
 <script src="js/bootstrap.js"></script>
 
 </body>

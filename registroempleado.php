@@ -1,87 +1,7 @@
 <?php
 session_start();
-
-$servername = "localhost";
-$username = "root";
-$password = "31193";
-$dbname = "tenis";
-
-// Create connection
-
-
-
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-
-	$conn = new mysqli($servername, $username, $password, $dbname);
-
-	// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
- 
-  $result = $conn->query("SELECT * from domicilio");
-  $row_cnt = $result->num_rows+1; //numero del id de  domicilio
-  $calle = $_POST['calle'];
-  $numero = $_POST['numero'];
-  $cp = $_POST['cp'];
-  settype($row_cnt, "integer");
-  settype($cp, "integer");
-  $stmt= $conn->prepare("INSERT into  domicilio (id_domicilio,calle,num,cp) values (?,?,?,?)");
-  $stmt->bind_param("issi", $row_cnt,$calle,$numero,$cp);
-  $stmt->execute();
-
-
-  $stmt = $conn->prepare("INSERT into empleado (nombre,primer_ap,segundo_ap,curp,rfc,telefono,nivel_escolar,salario,id_domicilio) values(?,?,?,?,?,?,?,?,?)");
-
-  $nombres = $_POST['nombres'];
-  $appaterno = $_POST['appaterno'];
-  $apmaterno = $_POST['apmaterno'];
-  $curp = $_POST['curp'];
-  $rfc = $_POST['rfc'];
-  $tel = $_POST['tel'];
-  $salario =$_POST['salario'];
-  $sel1 = $_POST['sel1'];  /*El nivel escolar es 1. Primaria, 2. Secundaria, 3. Preparatoria
-   4.-Licenciatura*/
-  $nivel = $_POST['nivel_usuario']; /* 3. Asesor de Ventas 2.Gerente 1. Administrador*/
-
-  settype($sel1, "integer");
-  settype($salario, "double");
-  settype($nivel, "integer");
-
-  $stmt->bind_param("ssssssidi", $nombres, $appaterno, $apmaterno, $curp, $rfc, $tel,$sel1, $salario,$row_cnt);
-  $stmt->execute();
-
-  	
-
-
-
-
-  $stmt->close();
-  $conn->close();
-
-
-}   
-
-
+include "conection/conexion.php";
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <html><head>
@@ -170,7 +90,7 @@ if ($conn->connect_error) {
     <div class="formulario" style="padding:0">
 	   <h1 class="text-center" style="padding-top:30px; padding-bottom:30px; opacity: 0.5; margin:0; background-color:#C4C4CC">Registrar Empleado</h1>
        <div style="padding:40px 50px">
-        <form role="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
+        <form role="form" method="POST" action="validar_registroempleado.php" >
 
           <div class="form-group text-center " >
           <label for="usrname"> Nombre(s)</label>
@@ -202,10 +122,11 @@ if ($conn->connect_error) {
           <input type="text" class="form-control" id="tel" name="tel" maxlength="15" required value="<?php echo $tel; ?>">
           </div>
 
-          <div class="form-group text-center">
+		  <div class="form-group text-center">
           <label for="salario"> Salario</label>
           <input type="text" class="form-control" id="salario" name="salario" required value="<?php echo $salario; ?>">
           </div>
+
 
           <div class="form-group  text-center">
           <label for="sel1">Escolaridad</label>
@@ -222,34 +143,57 @@ if ($conn->connect_error) {
           <label for="calle"> Domicilio</label><br/>
           <label for="calle">Calle</label>
           <input type="text" class="form-control form-inline" name="calle" id="calle" required value="<?php echo $calle; ?>">
-          </div> 
-
-          <div class="row text-center">     
-            <div class="col-lg-6">
-            <label for="numero">Numero</label>  
-            <input type="text" class="form-control form-inline" name="numero"  id="numero" required value="<?php echo $numero; ?>">
-            </div>  
-
-            <div class="col-lg-6">
-            <label for="cp">CP</label>
-            <select class="form-control" id="cp" name="cp" required>
-            <!-- Traer desde la base de datos -->
-            </select>
-            </div>
           </div>
 
-          </br>
-          <h1 class="text-center" style="padding-top:30px; padding-bottom:30px; opacity: 0.5; margin:0; background-color:#C4C4CC">Usuario</h1></form>
+          
+          <div class="row text-center">
 
+          	<div class="col-lg-6">
+          	<label for="numero">Numero</label>  
+	        <input type="text" class="form-control form-inline" name="numero"  id="numero" required value="<?php echo $numero; ?>">
+	        </div>
+
+	        <div class="col-lg-6">
+            <label for="cp">CP</label>
+            <select class="form-control" id="cp" name="cp" required>
+
+            <?php conectar();
+
+
+             if (!$conexion) {
+				die("Connection failed: " . mysqli_connect_error());
+        	}
+
+            $sqlselect = "SELECT * FROM cp";
+            $resultset = mysqli_query($conexion, $sqlselect);
+
+            while ($fila=mysqli_fetch_array($resultset)) {
+
+            ?>
+
+            <option value="<?php echo $fila['cp'];?>"><?php echo $fila["cp"]; ?></option>
+
+            <?php  
+          	}
+        	?>
+            </select>
+            </div>
+	      </div> 
+
+	      <?php desconectar();?>
+
+
+	      </br>
+          <h1 class="text-center" style="padding-top:30px; padding-bottom:30px; opacity: 0.5; margin:0; background-color:#C4C4CC">Usuario</h1></br>
 
           <div class="form-group text-center">
           <label for="contraseña"> Contraseña</label>
-          <input class="form-control" id="contraseña" type="text" name="pass" maxlength="13" required value="<?php echo $rfc; ?>">
+          <input class="form-control" id="contraseña" type="text" name="pass" maxlength="13" required value="<?php echo $password; ?>">
           </div>
 
-          <div class="form-group text-center">
-          <label for="Correo">Correo</label>
-          <input class="form-control" id="correo" type="text" name="correo" maxlength="13" required value="<?php echo $rfc; ?>">
+           <div class="form-group text-center">
+          <label for="correo">Correo</label>
+          <input class="form-control" id="correo" type="text" name="correo"  required value="<?php echo $correo; ?>">
           </div>
 
           <div class="radio" style="text-align: left;">
@@ -263,6 +207,11 @@ if ($conn->connect_error) {
           <div class="radio" style="text-align: left;">
           <label><input type="radio" name="nivel_usuario" value="1">Administrador</label>
           </div>
+
+
+
+
+
 
           <button type="submit" class="btn btn-danger my-btn btn-block"><span class="glyphicon glyphicon-off"></span> Registro</button>
 
