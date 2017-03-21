@@ -1,7 +1,28 @@
-<html><head>
+<?php
+	session_start();
+	include "conection/conexion.php";
+				
+
+?>
+<html>
+<head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="css/estilos.css">
+<script src="js/jquery-1.8.2.min.js"></script> 
+<script type="text/javascript">
+		var sku;
+		function borrar(sku){
+			$.post("borrarprod.php",{
+                //parametros
+                comand: sku,
+            },
+            function(data,status){                  
+            });
+			location.reload();
+		}
+</script>
+
 <title>Sneakerland | Tus Sneakers hablan por ti</title>
 </head>
 <body>
@@ -82,8 +103,24 @@
 			 <h4><label for="psw" class="glyphicon glyphicon-eye-open" > Buscar: </label></h4>
              <input type="text" class="form-control" id="inputdefault" id="psw" size="30px">	
 		</div>
-			<div class="table-responsive">
-				<table class="table">
+			<?php conectar();
+				
+
+                if (!$conexion) {
+				die("Connection failed: " . mysqli_connect_error());
+				}
+
+            $sqlselect = " select p.nombre_producto, p.precio, s.nombre_seccion, t.nombre, m.nombre_marca, p.sku from producto p, seccion s, tipo t, marca m
+			where  m.id_marca=marca_idmarca
+			and s.id_seccion=seccion_idseccion
+			and t.id_tipo=tipo_idtipo
+			order by sku;";
+			
+            
+			$result = mysqli_query($conexion, $sqlselect);
+			
+			echo"<div class=\"table-responsive\">
+				<table class=\"table\">
 				<thead>
 					<tr>
 						<th>Nombre</th>
@@ -91,70 +128,40 @@
 						<th>Seccion</th>
 						<th>Tipo</th>
 						<th>Marca</th>
+						<th>sku</th>
 						<th>Editar/Detalles</th>
 						<th>Eliminar</th>
 					</tr>
 				</thead>
-				<tbody>
-				<tr class="info">
-					<td>Vans TR</td>
-					<td>2000</td>
-					<td>1</td>
-					<td>A</td>
-					<td>VANS</td>
+				<tbody>";
+			
+				while($row = mysqli_fetch_array($result)){
+				echo" 
+				  <tr class=\"info\">
+					<td>".$row[0]."</td>
+					<td>".$row[1]."</td>
+					<td>".$row[2]."</td>
+					<td>".$row[3]."</td>
+					<td>".$row[4]."</td>
+					<td>".$row[5]."</td>
 					<td>
-						<button type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-plus"></span>
+						<button type=\"button\" class=\"btn btn-default btn-sm\">
+						<span class=\"glyphicon glyphicon-plus\"></span>
 						</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-default btn-sm btn-danger">
-						<span class="glyphicon glyphicon-remove-sign"></span>
+						<button type=\"button\" class=\"btn btn-default btn-sm btn-danger\"  onclick=\"borrar(".$row[5].")\">
+						<span class=\"glyphicon glyphicon-remove-sign\"></span>
 						</button>
 					</td>
-				</tr>
-				
-				<tr >
-					<td>Adidas Superstar</td>
-					<td>1400</td>
-					<td>1</td>
-					<td>A</td>
-					<td>Adidas</td>
-					<td>
-						<button type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-plus"></span>
-						</button>
-					</td>
-					<td>
-						<button type="button" class="btn btn-default btn-sm btn-danger">
-						<span class="glyphicon glyphicon-remove-sign"></span>
-						</button>
-					</td>
-				</tr>
-				
-				<tr >
-					<td>Nike Airmax</td>
-					<td>1300</td>
-					<td>1</td>
-					<td>A</td>
-					<td>Nike</td>
-					<td>
-						<button type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-plus"></span>
-						</button>
-					</td>
-					<td>
-						<button type="button" class="btn btn-default btn-sm btn-danger">
-						<span class="glyphicon glyphicon-remove-sign"></span>
-						</button>
-					</td>
-				</tr>
-				
-				
-
-				</tbody>
+				  </tr>";
+				}
+	
+		   echo"</tbody>
 				</table>
-			</div>
+			</div>";
+			?>
+		
 		</div>	
 	</div>
 </div>

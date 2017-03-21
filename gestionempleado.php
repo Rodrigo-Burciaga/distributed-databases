@@ -1,7 +1,30 @@
+<?php
+	session_start();
+	include "conection/conexion.php";
+
+?>
+
+
 <html><head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<script src="js/jquery-1.8.2.min.js"></script> 
+	<script type="text/javascript">
+		var comand;
+		function borrar(id){
+			$.post("borraremp.php",{
+                //parametros
+
+                comand: id,
+
+            },
+            function(data,status){ 
+            alert(data);                 
+            });
+			//location.reload();
+		}
+	</script>
 <title>Sneakerland | Tus Sneakers hablan por ti</title>
 </head>
 <body>
@@ -81,8 +104,20 @@
 			 <h4><label for="psw" class="glyphicon glyphicon-eye-open" > Buscar: </label></h4>
              <input type="text" class="form-control" id="inputdefault" id="psw" size="30px">	
 		</div>
-			<div class="table-responsive">
-				<table class="table">
+			
+			<?php conectar();
+				
+
+                if (!$conexion) {
+				die("Connection failed: " . mysqli_connect_error());
+				}
+
+            $sqlselect = "select e.nombre, e.primer_ap, e.segundo_ap, e.curp, concat(d.calle,' no ', d.num),e.id_empleado from empleado e, domicilio d 
+			where e.id_domicilio=d.id_domicilio;";
+            $result = mysqli_query($conexion, $sqlselect);
+			
+			echo"<div class=\"table-responsive\">
+				<table class=\"table table-hover \">
 				<thead>
 					<tr>
 						<th>Nombre</th>
@@ -90,68 +125,43 @@
 						<th>Apellido Mat</th>
 						<th>CURP</th>
 						<th>Domicilio</th>
+						<th>ID</th>
 						<th>Editar/Detalles</th>
 						<th>Eliminar</th>
 					</tr>
 				</thead>
-				<tbody>
-				<tr class="info">
-					<td>Jorge</td>
-					<td>Gonzalez</td>
-					<td>Garcia</td>
-					<td>ABCDE1234556412</td>
-					<td>calle 1 colonia 2 delegacion 3</td>
+				<tbody>";
+			
+				while($row = mysqli_fetch_array($result)){
+				echo" 
+				  <tr>
+					<td>".$row[0]."</td>
+					<td>".$row[1]."</td>
+					<td>".$row[2]."</td>
+					<td>".$row[3]."</td>
+					<td>".$row[4]."</td>
+					<td>".$row[5]."</td>
 					<td>
-						<button type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-plus"></span>
+						<button type=\"button\" class=\"btn btn-default btn-sm\">
+						<span class=\"glyphicon glyphicon-plus\"></span>
 						</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-default btn-sm btn-danger">
-						<span class="glyphicon glyphicon-remove-sign"></span>
+						<button type=\"button\" class=\"btn btn-default btn-sm btn-danger\"  onclick=\"borrar(".$row[5].")\">
+						<span class=\"glyphicon glyphicon-remove-sign\"></span>
 						</button>
 					</td>
-				</tr>
-				
-				<tr>
-					<td>Luis</td>
-					<td>Ramos</td>
-					<td>Hernandez</td>
-					<td>ABCDE1234556412</td>
-					<td>calle 1 colonia 2 delegacion 3</td>
-					<td>
-						<button type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-plus"></span>
-						</button>
-					</td>
-					<td>
-						<button type="button" class="btn btn-default btn-sm btn-danger">
-						<span class="glyphicon glyphicon-remove-sign"></span>
-						</button>
-					</td>
-				</tr>
-				
-				<tr class="info">
-					<td>Andres</td>
-					<td>Contreras</td>
-					<td>Caballero</td>
-					<td>ABCDE1234556412</td>
-					<td>calle 1 colonia 2 delegacion 3</td>
-					<td>
-						<button type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-plus"></span>
-						</button>
-					</td>
-					<td>
-						<button type="button" class="btn btn-default btn-sm btn-danger">
-						<span class="glyphicon glyphicon-remove-sign"></span>
-						</button>
-					</td>
-				</tr>
-
-				</tbody>
+				  </tr>";
+				}
+	
+		   echo"</tbody>
 				</table>
-			</div>
+			</div>";
+			desconectar();
+			?>
+		
+		
+		
 		</div>
 </div>
 

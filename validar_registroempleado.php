@@ -91,7 +91,7 @@ $dbname = "tenis";
 <div class="row">
   <div class="col-lg-8 col-md-8 col-sm-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2">
     <div class="formulario" style="padding:0">
-    <h1 class="text-center" style="padding-top:30px; padding-bottom:30px; opacity: 0.5; margin:0; background-color:#C4C4CC">Registro Producto</h1>
+    <h1 class="text-center" style="padding-top:30px; padding-bottom:30px; opacity: 0.5; margin:0; background-color:#C4C4CC">Registro Empleado</h1>
     <div style="padding:40px 50px" class="text-center">
 
 <?php 
@@ -105,8 +105,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
 
-  $result = $conn->query("SELECT * from domicilio");
-  $row_cnt = $result->num_rows+1; //numero del id de  domicilio
+  $result = $conn->query("SELECT max(id_domicilio)+1 as maximo from domicilio");
+  $row = $result->fetch_assoc();
+  $row_cnt=$row["maximo"];
   $calle = $_POST['calle'];
   $numero = $_POST['numero'];
   $cp = $_POST['cp'];
@@ -114,7 +115,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   settype($cp, "integer");
   $stmt= $conn->prepare("INSERT into  domicilio (id_domicilio,calle,num,cp) values (?,?,?,?)");
   $stmt->bind_param("issi", $row_cnt,$calle,$numero,$cp);
-
+  
   if ($stmt->execute()) {
 
 
@@ -132,8 +133,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $rfc = $_POST['rfc'];
     $tel = $_POST['tel'];
     $salario =$_POST['salario'];
-    $sel1 = $_POST['sel1'];  /*El nivel escolar es 1. Primaria, 2. Secundaria, 3. Preparatoria
-     4.-Licenciatura*/
+    $sel1 = $_POST['sel1'];  /*El nivel escolar es 1. Primaria, 2. Secundaria, 3. Preparatoria 4.-Licenciatura*/
     
 
     settype($sel1, "integer");
@@ -144,8 +144,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
 
-      $result = $conn->query("SELECT * from empleado");
-      $row_cnt = $result->num_rows; //numero del empleado para usuario
+      $result = $conn->query("SELECT max(id_empleado) as maximo from empleado");
+      $row = $result->fetch_assoc();
+      $row_cnt=$row["maximo"];//numero del empleado para usuario
 
       $stmt = $conn->prepare("INSERT into usuario (id_usuario,id_nivel_usuario,correo,password,empleado_id_empleado)values(?,?,?,?,?)");
       $stmt->bind_param("iissi", $row_cnt,$nivel,$correo,$password,$row_cnt);

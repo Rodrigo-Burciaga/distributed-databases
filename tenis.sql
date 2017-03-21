@@ -141,7 +141,7 @@ CREATE TABLE `domicilio` (
   `cp` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_domicilio`),
   KEY `fk_domicilio_cp1_idx` (`cp`),
-  CONSTRAINT `fk_domicilio_cp1` FOREIGN KEY (`cp`) REFERENCES `cp` (`cp`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `domicilio_ibfk_1` FOREIGN KEY (`cp`) REFERENCES `cp` (`cp`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -151,7 +151,7 @@ CREATE TABLE `domicilio` (
 
 LOCK TABLES `domicilio` WRITE;
 /*!40000 ALTER TABLE `domicilio` DISABLE KEYS */;
-INSERT INTO `domicilio` VALUES (1,'Andares','100',7010),(2,'Lagos y rios','2A',10040),(3,'Naranjal','423',6050),(4,'Guadalupe Victoria','300',8700),(5,'Calle A23','300',6140),(6,'Transportistas','9823',9080),(7,'Minero Metalurgicos','183',6030),(8,'Arboledas','6140',6140),(9,'Cook','0192',5020),(10,'Hawaii','1234',1540),(11,'Esperanza','4200',5128),(12,'Lago Ness','500',2810),(13,'Reforma','2983a',6100),(14,'Isaac Newton','1823',7010),(15,'Calle Amanecer','1234',8040),(16,'Camino Serrano','192',6100),(17,'Diego Rivera','1123',5128),(18,'Asuncion','123',8620),(19,'Canal de cobre','12',5020),(20,'Europa','1123',8610),(21,'Jupiter','234',1700),(22,'Pinos','1203',6140),(23,'Concepcion','1293',6050),(24,'Cuba','113',6030),(25,'Albert Einstein','234',8040),(26,'Marte','12',3530),(27,'Libertad','123a',11000),(28,'Linares ','1123',9080),(29,'Benito Juarez','1123',6140),(30,'Las Aguilas','134',9470),(31,'Pozo 90','102',10040),(32,'Lago ontario','78',11410),(33,'Lago ontario','78',11410),(34,'Revillagigedo','56',9080);
+INSERT INTO `domicilio` VALUES (1,'Andares','100',7010),(2,'Lagos y rios','2A',10040),(3,'Naranjal','423',6050),(4,'Guadalupe Victoria','300',8700),(5,'Calle A23','300',6140),(6,'Transportistas','9823',9080),(7,'Minero Metalurgicos','183',6030),(8,'Arboledas','6140',6140),(9,'Cook','0192',5020),(10,'Hawaii','1234',1540),(11,'Esperanza','4200',5128),(12,'Lago Ness','500',2810),(13,'Reforma','2983a',6100),(14,'Isaac Newton','1823',7010),(15,'Calle Amanecer','1234',8040),(16,'Camino Serrano','192',6100),(17,'Diego Rivera','1123',5128),(18,'Asuncion','123',8620),(19,'Canal de cobre','12',5020),(20,'Europa','1123',8610),(21,'Jupiter','234',1700),(22,'Pinos','1203',6140),(23,'Concepcion','1293',6050),(24,'Cuba','113',6030),(25,'Albert Einstein','234',8040),(26,'Marte','12',3530),(27,'Libertad','123a',11000),(28,'Linares ','1123',9080),(29,'Benito Juarez','1123',6140),(30,'Las Aguilas','134',9470),(31,'Pozo 90','102',10040),(32,'anillo perifÃ©rico','70',7090);
 /*!40000 ALTER TABLE `domicilio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,8 +175,8 @@ CREATE TABLE `empleado` (
   `nivel_escolar` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_empleado`),
   KEY `fk_empleado_domicilio1_idx` (`id_domicilio`),
-  CONSTRAINT `fk_empleado_domicilio1` FOREIGN KEY (`id_domicilio`) REFERENCES `domicilio` (`id_domicilio`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+  CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`id_domicilio`) REFERENCES `domicilio` (`id_domicilio`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +185,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,'NURIA','AVILA','COLIN','AQW131WSS12SD1','AQW131WSS','55341234',1,5000,NULL),(2,'BRENDA','BLANCO','ALVAREZ','AMJ182NA131AJQ','AMJ182NA1','12543678',2,5000,NULL),(3,'ERICK','COLIN','CRUZ','EUWEUQ12NJS21J','EUWEUQ11','3459123',3,4000,NULL),(4,'PEDRO','CRUZ','CABALLERO','PEWQWQW12QDCD1','PEWQWQW12','02931231',4,6000,NULL),(5,'YAMIL OMAR','DELGADO','GONZALEZ','YOWQ12WQDQWQD1','YOWQ12WQD','293488132',5,5000,NULL),(6,'BLANCA LISET','FLORES','RAMIREZ','BLQSDQ12SQSSAD','BLQSDQ12S','273626363',6,7000,NULL),(7,'LINDA ISABEL','FUENTES','ANGELES','LISQASQ12SQS1A','LISQASQ12','382712312',7,7500,NULL),(8,'VICTOR IVAN','OLVERA','PADILLA','VI12J1NJNQNJQN','VI12J1NJ','92913949',8,7500,NULL),(9,'ARTURO','PACHECO','ANTONIO','AR192AJAN1N12JN1','AR192AJAN','9182831',9,6000,NULL),(10,'LUIS EDUARDO','SALCEDO','VAZQUEZ','LU12JM1N2WJ1NJ1','LU12JM1N2W','19239192',10,5500,NULL),(11,'OLIVER CARLOS','STREVEL','PEREZ','IL0181NBH1BJ2B1','IL0181NBH1','29172134',11,5500,NULL),(12,'FERNANDO','GOMEZ','MENESES','FENJ1NJANJ1NJN12W','FENJ1NJANJ','29192123',12,7500,NULL),(13,'AGUSTIN URIEL','ARVIZU','MENDOZA','AAJANJQNJHWNQNJ11','FENJ1NJAN','291731712',13,6500,NULL),(14,'JOSE ALEJANDRO','CRUZ','HERNANDEZ','JOQEMK12MKQMAKA','JOQEMK12','2312113213',14,6500,NULL),(15,'LUIS ALBERTO','BAUTISTA','MORA','LUDNJQNQUJ12NJN','LUDNJQNQUJ','98238312',15,7500,NULL),(16,'FRANCISCO JAVIER','DIAZ','HERNANDEZ','FRJNED1I2N2N1J','FRJNED1I','30986737',16,8500,NULL),(17,'JOSE ANTONIO','ESTRADA','PAVIA','JO1JSSMKAMKASM9','JO1JSSMKA','22818381',17,6500,NULL),(18,'HUGO MICHELLE','FLORES','MONDRAGON','HUQIWI1N2IAMIAAQ2','HUQIWI1N','21292199',18,7500,NULL),(19,'JOSE EDUARDO','FRAGOSO','COLIN','JEDNAQNJI12JANJQ11','JEDNAQNJ','293199232',19,7500,NULL),(20,'MIGUEL SHAMID','GALVAN','ARCE','MIAQMKM1JM121J21J','MIAQMKM1','927371717',20,7500,NULL);
+INSERT INTO `empleado` VALUES (1,'NURIA','AVILA','COLIN','AQW131WSS12SD1','AQW131WSS','55341234',1,5000,NULL),(2,'BRENDA','BLANCO','ALVAREZ','AMJ182NA131AJQ','AMJ182NA1','12543678',2,5000,NULL),(3,'ERICK','COLIN','CRUZ','EUWEUQ12NJS21J','EUWEUQ11','3459123',3,4000,NULL),(4,'PEDRO','CRUZ','CABALLERO','PEWQWQW12QDCD1','PEWQWQW12','02931231',4,6000,NULL),(5,'YAMIL OMAR','DELGADO','GONZALEZ','YOWQ12WQDQWQD1','YOWQ12WQD','293488132',5,5000,NULL),(6,'BLANCA LISET','FLORES','RAMIREZ','BLQSDQ12SQSSAD','BLQSDQ12S','273626363',6,7000,NULL),(7,'LINDA ISABEL','FUENTES','ANGELES','LISQASQ12SQS1A','LISQASQ12','382712312',7,7500,NULL),(8,'VICTOR IVAN','OLVERA','PADILLA','VI12J1NJNQNJQN','VI12J1NJ','92913949',8,7500,NULL),(9,'ARTURO','PACHECO','ANTONIO','AR192AJAN1N12JN1','AR192AJAN','9182831',9,6000,NULL),(10,'LUIS EDUARDO','SALCEDO','VAZQUEZ','LU12JM1N2WJ1NJ1','LU12JM1N2W','19239192',10,5500,NULL),(11,'OLIVER CARLOS','STREVEL','PEREZ','IL0181NBH1BJ2B1','IL0181NBH1','29172134',11,5500,NULL),(12,'FERNANDO','GOMEZ','MENESES','FENJ1NJANJ1NJN12W','FENJ1NJANJ','29192123',12,7500,NULL),(13,'AGUSTIN URIEL','ARVIZU','MENDOZA','AAJANJQNJHWNQNJ11','FENJ1NJAN','291731712',13,6500,NULL),(14,'JOSE ALEJANDRO','CRUZ','HERNANDEZ','JOQEMK12MKQMAKA','JOQEMK12','2312113213',14,6500,NULL),(15,'LUIS ALBERTO','BAUTISTA','MORA','LUDNJQNQUJ12NJN','LUDNJQNQUJ','98238312',15,7500,NULL),(16,'FRANCISCO JAVIER','DIAZ','HERNANDEZ','FRJNED1I2N2N1J','FRJNED1I','30986737',16,8500,NULL),(17,'JOSE ANTONIO','ESTRADA','PAVIA','JO1JSSMKAMKASM9','JO1JSSMKA','22818381',17,6500,NULL),(18,'HUGO MICHELLE','FLORES','MONDRAGON','HUQIWI1N2IAMIAAQ2','HUQIWI1N','21292199',18,7500,NULL),(19,'JOSE EDUARDO','FRAGOSO','COLIN','JEDNAQNJI12JANJQ11','JEDNAQNJ','293199232',19,7500,NULL),(20,'MIGUEL SHAMID','GALVAN','ARCE','MIAQMKM1JM121J21J','MIAQMKM1','927371717',20,7500,NULL),(23,'Karla','Camacho','Rivera','CARK960716MDFMVR02','CARK9607161Z8','5559409592',32,12000,4);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,8 +203,8 @@ CREATE TABLE `empleado_status` (
   PRIMARY KEY (`id_empleado`,`id_status`),
   KEY `fk_empleado_has_status_status1_idx` (`id_status`),
   KEY `fk_empleado_has_status_empleado1_idx` (`id_empleado`),
-  CONSTRAINT `fk_empleado_has_status_empleado1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_empleado_has_status_status1` FOREIGN KEY (`id_status`) REFERENCES `status` (`id_status`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `empleado_status_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `empleado_status_ibfk_2` FOREIGN KEY (`id_status`) REFERENCES `status` (`id_status`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -214,7 +214,7 @@ CREATE TABLE `empleado_status` (
 
 LOCK TABLES `empleado_status` WRITE;
 /*!40000 ALTER TABLE `empleado_status` DISABLE KEYS */;
-INSERT INTO `empleado_status` VALUES (1,1,'2017-11-03'),(2,1,'2017-11-03'),(3,2,'2017-11-03'),(4,1,'2017-11-03'),(5,1,'2017-11-03'),(6,1,'2017-11-03'),(7,1,'2017-11-02'),(8,1,'2017-11-03'),(9,1,'2017-11-03'),(10,1,'2017-11-03'),(11,1,'2017-11-03'),(12,1,'2017-11-03'),(13,1,'2017-11-01'),(14,2,'2017-11-03'),(15,1,'2017-11-03'),(16,1,'2017-11-03'),(17,2,'2017-11-03'),(18,1,'2017-11-03'),(19,1,'2017-11-03'),(20,1,'2017-11-03');
+INSERT INTO `empleado_status` VALUES (1,1,'2017-02-25'),(2,1,'2017-02-25'),(3,2,'2017-02-25'),(4,1,'2017-02-25'),(5,1,'2017-02-25'),(6,1,'2017-02-25'),(7,1,'2017-01-03'),(8,1,'2017-02-25'),(9,1,'2017-02-25'),(10,1,'2017-02-25'),(11,1,'2017-02-25'),(12,1,'2017-02-25'),(13,1,'2017-01-24'),(14,2,'2017-02-25'),(15,1,'2017-02-25'),(16,1,'2017-02-25'),(17,2,'2017-02-25'),(18,1,'2017-02-25'),(19,1,'2017-02-25'),(20,1,'2017-01-13'),(23,1,'2017-03-21');
 /*!40000 ALTER TABLE `empleado_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,8 +232,8 @@ CREATE TABLE `existencia` (
   PRIMARY KEY (`id_sucursal`,`id_producto`),
   KEY `fk_sucursal_has_producto_producto1_idx` (`id_producto`),
   KEY `fk_sucursal_has_producto_sucursal1_idx` (`id_sucursal`),
-  CONSTRAINT `fk_sucursal_has_producto_producto1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`sku`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_sucursal_has_producto_sucursal1` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursal` (`id_sucursal`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `existencia_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`sku`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `existencia_ibfk_2` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursal` (`id_sucursal`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -291,10 +291,10 @@ CREATE TABLE `producto` (
   KEY `fk_producto_seccion1_idx` (`seccion_idseccion`),
   KEY `fk_producto_tipo1_idx` (`tipo_idtipo`),
   KEY `fk_producto_marca1_idx` (`marca_idmarca`),
-  CONSTRAINT `fk_producto_marca1` FOREIGN KEY (`marca_idmarca`) REFERENCES `marca` (`id_marca`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_producto_seccion1` FOREIGN KEY (`seccion_idseccion`) REFERENCES `seccion` (`id_seccion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_producto_tipo1` FOREIGN KEY (`tipo_idtipo`) REFERENCES `tipo` (`id_tipo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+  CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`marca_idmarca`) REFERENCES `marca` (`id_marca`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`seccion_idseccion`) REFERENCES `seccion` (`id_seccion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`tipo_idtipo`) REFERENCES `tipo` (`id_tipo`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,7 +303,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,'Air Huarache','Azul,negro,bota',2399,NULL,1,2,1),(2,'Air Jordan XXXI','Negro, Bota',3699,NULL,1,2,9),(3,'Air Force 1','Camuflaje, Negro, gris',1699,NULL,1,2,1),(4,'Gorra True Red Label','Azul',699,NULL,1,1,1),(5,'Air Force 1','Camuflaje, Negro, gris',1699,NULL,1,2,1),(6,'Air Max 90 LRT','Negro,Blanco',1299,NULL,2,2,1),(7,'Air Max Thea','Negro, Blanco',999,NULL,2,2,1),(8,'Drose 7 Primeknit','Negro,Blanco',4499,NULL,1,2,2),(9,'Stan Smith boost','Blanco, Verde',2599,NULL,1,2,2),(10,'Super Star Boost','Negro,Blanco',2699,NULL,1,2,2),(11,'Gazele','Naranja,Azul',1799,NULL,1,2,2),(12,'Gazele','Rosa, Gris',1699,NULL,3,2,2),(13,'Legging Originals','Negro,Blanco',799,NULL,3,3,2),(14,'Stan Smith','Blanco, Rosa',649,NULL,2,2,2),(15,'SuperStar 3601','Estampado, Gris, Rojo',1199,NULL,2,2,2),(16,'Choclo negro Conv','Negro, Blanco',899,NULL,1,2,6),(17,'Choclo negro Conv','Negro, Blanco',699,NULL,3,2,6),(18,'Chuck Taylor Allst','Negro, Blanco',1699,NULL,1,2,6),(19,'Chuck Taylor Allst','Rojo',1699,NULL,1,2,6),(20,'Chuck Taylor Allst','Rojo',1699,NULL,3,2,6),(21,'Old Skool','Negro',999,NULL,1,2,3),(22,'Authentic','Negro,Gris',999,NULL,1,2,3),(23,'Old Skool Premium','Rojo,Blanco',1649,NULL,1,2,3),(24,'Classic Slip On','Negro,Gris',1299,NULL,3,2,3),(25,'Old Skool','Purpura',949,NULL,3,2,3),(26,'Authentic','Negro,Gris',999,NULL,1,2,3),(27,'Authentic LO PRO','Salmon,',749,NULL,3,2,3),(28,'Authentic','Negro,Gris',999,NULL,1,2,3),(29,'Vikky Platform','Azul',1499,NULL,1,2,8),(30,'Clyde Premium ','Negro',1899,NULL,3,2,8),(31,'Clyde','Rojo',1899,NULL,1,2,8),(32,'Rebel Mid','Gris',1499,NULL,1,2,8),(33,'Class Sport','Negro',899,NULL,1,4,2),(34,'Classic Camo','Camuflaje',699,NULL,1,4,2),(35,'Bp Tricolor','Negro',799,NULL,1,4,2),(36,'Natick-24 Liter','Rojo',1499,NULL,1,4,5),(37,'Right Pack','Rojo',799,NULL,1,4,5),(38,'Janspot Superbreak','Estampado',469,NULL,1,4,11),(39,'Cangurera Fifth','Negro',299,NULL,1,6,2),(40,'ko','kop}',13,NULL,1,1,1),(41,'ko','kop}',13,NULL,1,1,1),(42,'ko','kop}',13,NULL,1,1,1),(43,'ko','kop}',13,NULL,1,1,1);
+INSERT INTO `producto` VALUES (1,'Air Huarache','Azul,negro,bota',2399,NULL,1,2,1),(2,'Air Jordan XXXI','Negro, Bota',3699,NULL,1,2,9),(3,'Air Force 1','Camuflaje, Negro, gris',1699,NULL,1,2,1),(4,'Gorra True Red Label','Azul',699,NULL,1,1,1),(5,'Air Force 1','Camuflaje, Negro, gris',1699,NULL,1,2,1),(6,'Air Max 90 LRT','Negro,Blanco',1299,NULL,2,2,1),(7,'Air Max Thea','Negro, Blanco',999,NULL,2,2,1),(8,'Drose 7 Primeknit','Negro,Blanco',4499,NULL,1,2,2),(9,'Stan Smith boost','Blanco, Verde',2599,NULL,1,2,2),(10,'Super Star Boost','Negro,Blanco',2699,NULL,1,2,2),(11,'Gazele','Naranja,Azul',1799,NULL,1,2,2),(12,'Gazele','Rosa, Gris',1699,NULL,3,2,2),(13,'Legging Originals','Negro,Blanco',799,NULL,3,3,2),(14,'Stan Smith','Blanco, Rosa',649,NULL,2,2,2),(15,'SuperStar 3601','Estampado, Gris, Rojo',1199,NULL,2,2,2),(16,'Choclo negro Conv','Negro, Blanco',899,NULL,1,2,6),(17,'Choclo negro Conv','Negro, Blanco',699,NULL,3,2,6),(18,'Chuck Taylor Allst','Negro, Blanco',1699,NULL,1,2,6),(19,'Chuck Taylor Allst','Rojo',1699,NULL,1,2,6),(20,'Chuck Taylor Allst','Rojo',1699,NULL,3,2,6),(21,'Old Skool','Negro',999,NULL,1,2,3),(22,'Authentic','Negro,Gris',999,NULL,1,2,3),(23,'Old Skool Premium','Rojo,Blanco',1649,NULL,1,2,3),(24,'Classic Slip On','Negro,Gris',1299,NULL,3,2,3),(25,'Old Skool','Purpura',949,NULL,3,2,3),(26,'Authentic','Negro,Gris',999,NULL,1,2,3),(27,'Authentic LO PRO','Salmon,',749,NULL,3,2,3),(28,'Authentic','Negro,Gris',999,NULL,1,2,3),(29,'Vikky Platform','Azul',1499,NULL,1,2,8),(30,'Clyde Premium ','Negro',1899,NULL,3,2,8),(31,'Clyde','Rojo',1899,NULL,1,2,8),(32,'Rebel Mid','Gris',1499,NULL,1,2,8),(33,'Class Sport','Negro',899,NULL,1,4,2),(34,'Classic Camo','Camuflaje',699,NULL,1,4,2),(35,'Bp Tricolor','Negro',799,NULL,1,4,2),(36,'Natick-24 Liter','Rojo',1499,NULL,1,4,5),(37,'Right Pack','Rojo',799,NULL,1,4,5),(38,'Janspot Superbreak','Estampado',469,NULL,1,4,11),(39,'Cangurera Fifth','Negro',299,NULL,1,6,2);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -371,7 +371,7 @@ CREATE TABLE `sucursal` (
   KEY `fk_sucursal_domicilio2_idx` (`id_domicilio`),
   KEY `fk_sucursal_empleado1_idx` (`id_gerente`),
   CONSTRAINT `fk_sucursal_domicilio2` FOREIGN KEY (`id_domicilio`) REFERENCES `domicilio` (`id_domicilio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_sucursal_empleado1` FOREIGN KEY (`id_gerente`) REFERENCES `empleado` (`id_empleado`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `sucursal_ibfk_1` FOREIGN KEY (`id_gerente`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -396,7 +396,7 @@ CREATE TABLE `talla` (
   `id_talla` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_talla` varchar(45) NOT NULL,
   PRIMARY KEY (`id_talla`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -423,8 +423,8 @@ CREATE TABLE `talla_producto` (
   PRIMARY KEY (`talla_num_talla`,`producto_sku`),
   KEY `fk_talla_has_producto_producto1_idx` (`producto_sku`),
   KEY `fk_talla_has_producto_talla1_idx` (`talla_num_talla`),
-  CONSTRAINT `fk_talla_has_producto_producto1` FOREIGN KEY (`producto_sku`) REFERENCES `producto` (`sku`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_talla_has_producto_talla1` FOREIGN KEY (`talla_num_talla`) REFERENCES `talla` (`id_talla`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `talla_producto_ibfk_1` FOREIGN KEY (`producto_sku`) REFERENCES `producto` (`sku`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `talla_producto_ibfk_2` FOREIGN KEY (`talla_num_talla`) REFERENCES `talla` (`id_talla`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -478,8 +478,8 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id_usuario`),
   KEY `fk_usuario_usuario_nivel1_idx` (`id_nivel_usuario`),
   KEY `fk_usuario_empleado1_idx` (`empleado_id_empleado`),
-  CONSTRAINT `fk_usuario_empleado1` FOREIGN KEY (`empleado_id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_usuario_nivel1` FOREIGN KEY (`id_nivel_usuario`) REFERENCES `usuario_nivel` (`id_nivel_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`empleado_id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`id_nivel_usuario`) REFERENCES `usuario_nivel` (`id_nivel_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -489,7 +489,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,3,'nuria_12314@hotmail.com','nuria1',1),(2,1,'brendaloka_1990@hotmail.com','bren1',2),(3,3,'erickson_1990@hotmail.com','erick1',3),(4,2,'pedro_cruz@hotmail.com','pedro1',4),(5,3,'yamil_odel@hotmail.com','yam1',5),(6,3,'blanca_lisf@gmail.com','blanc1',6),(7,3,'lind_fue1@hotmail.com','linda1',7),(8,3,'vico_12334@hotmail.com','victor2',8),(9,2,'arturopache@hotmail.com','arturo1',9),(10,3,'salsa_eduardo@hotmail.com','eduardo1',10),(11,3,'oliver_atom@gmailcom','oliver1',11),(12,3,'fer_gomez123@hotmail.com','fernando1',12),(13,3,'agus_uri_arv@hotmail.com','agusti1',13),(14,3,'jose_alejo@hotmail.com','jose1',14),(15,2,'albert_baut@hotmail.com','alberto1',15),(16,3,'pancho_xavi@hotmail.com','francisco1',16),(17,3,'jose_antony12@hotmail.com','antonio1',17),(18,3,'michelle_hugo1@hotmail.com','hugo1',18),(19,3,'eduardo_fragoso@gmail.com','eduardo1',19),(20,3,'shamid_miguel@hotmail.com','miguel1',20);
+INSERT INTO `usuario` VALUES (1,3,'nuria_12314@hotmail.com','nuria1',1),(2,1,'brendaloka_1990@hotmail.com','bren1',2),(3,3,'erickson_1990@hotmail.com','erick1',3),(4,2,'pedro_cruz@hotmail.com','pedro1',4),(5,3,'yamil_odel@hotmail.com','yam1',5),(6,3,'blanca_lisf@gmail.com','blanc1',6),(7,3,'lind_fue1@hotmail.com','linda1',7),(8,3,'vico_12334@hotmail.com','victor2',8),(9,2,'arturopache@hotmail.com','arturo1',9),(10,3,'salsa_eduardo@hotmail.com','eduardo1',10),(11,3,'oliver_atom@gmailcom','oliver1',11),(12,3,'fer_gomez123@hotmail.com','fernando1',12),(13,3,'agus_uri_arv@hotmail.com','agusti1',13),(14,3,'jose_alejo@hotmail.com','jose1',14),(15,2,'albert_baut@hotmail.com','alberto1',15),(16,3,'pancho_xavi@hotmail.com','francisco1',16),(17,3,'jose_antony12@hotmail.com','antonio1',17),(18,3,'michelle_hugo1@hotmail.com','hugo1',18),(19,3,'eduardo_fragoso@gmail.com','eduardo1',19),(20,3,'shamid_miguel@hotmail.com','miguel1',20),(23,3,'karlacamacho@gmail.com','karla123',23);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -526,4 +526,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-18 15:46:29
+-- Dump completed on 2017-03-21 10:38:38
