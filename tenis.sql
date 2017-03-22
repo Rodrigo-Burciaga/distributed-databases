@@ -31,7 +31,7 @@ CREATE TABLE `cliente` (
   `id_domicilio` int(11) NOT NULL,
   PRIMARY KEY (`id_cliente`),
   KEY `fk_cliente_domicilio1_idx` (`id_domicilio`),
-  CONSTRAINT `fk_cliente_domicilio1` FOREIGN KEY (`id_domicilio`) REFERENCES `domicilio` (`id_domicilio`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`id_domicilio`) REFERENCES `domicilio` (`id_domicilio`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,8 +60,8 @@ CREATE TABLE `compra` (
   PRIMARY KEY (`producto_sku`,`cliente_id_cliente`),
   KEY `fk_producto_has_cliente_cliente1_idx` (`cliente_id_cliente`),
   KEY `fk_producto_has_cliente_producto1_idx` (`producto_sku`),
-  CONSTRAINT `fk_producto_has_cliente_cliente1` FOREIGN KEY (`cliente_id_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_producto_has_cliente_producto1` FOREIGN KEY (`producto_sku`) REFERENCES `producto` (`sku`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`cliente_id_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`producto_sku`) REFERENCES `producto` (`sku`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -151,7 +151,7 @@ CREATE TABLE `domicilio` (
 
 LOCK TABLES `domicilio` WRITE;
 /*!40000 ALTER TABLE `domicilio` DISABLE KEYS */;
-INSERT INTO `domicilio` VALUES (1,'Andares','100',7010),(2,'Lagos y rios','2A',10040),(3,'Naranjal','423',6050),(4,'Guadalupe Victoria','300',8700),(5,'Calle A23','300',6140),(6,'Transportistas','9823',9080),(7,'Minero Metalurgicos','183',6030),(8,'Arboledas','6140',6140),(9,'Cook','0192',5020),(10,'Hawaii','1234',1540),(11,'Esperanza','4200',5128),(12,'Lago Ness','500',2810),(13,'Reforma','2983a',6100),(14,'Isaac Newton','1823',7010),(15,'Calle Amanecer','1234',8040),(16,'Camino Serrano','192',6100),(17,'Diego Rivera','1123',5128),(18,'Asuncion','123',8620),(19,'Canal de cobre','12',5020),(20,'Europa','1123',8610),(21,'Jupiter','234',1700),(22,'Pinos','1203',6140),(23,'Concepcion','1293',6050),(24,'Cuba','113',6030),(25,'Albert Einstein','234',8040),(26,'Marte','12',3530),(27,'Libertad','123a',11000),(28,'Linares ','1123',9080),(29,'Benito Juarez','1123',6140),(30,'Las Aguilas','134',9470),(31,'Pozo 90','102',10040),(32,'anillo perifÃ©rico','70',7090);
+INSERT INTO `domicilio` VALUES (1,'Andares','100',7010),(2,'Lagos y rios','2A',10040),(3,'Naranjal','423',6050),(4,'Guadalupe Victoria','300',8700),(5,'Calle A23','300',6140),(6,'Transportistas','9823',9080),(7,'Minero Metalurgicos','183',6030),(8,'Arboledas','6140',6140),(9,'Cook','0192',5020),(10,'Hawaii','1234',1540),(11,'Esperanza','4200',5128),(12,'Lago Ness','500',2810),(13,'Reforma','2983a',6100),(14,'Isaac Newton','1823',7010),(15,'Calle Amanecer','1234',8040),(16,'Camino Serrano','192',6100),(17,'Diego Rivera','1123',5128),(18,'Asuncion','123',8620),(19,'Canal de cobre','12',5020),(20,'Europa','1123',8610),(21,'Jupiter','234',1700),(22,'Pinos','1203',6140),(23,'Concepcion','1293',6050),(24,'Cuba','113',6030),(25,'Albert Einstein','234',8040),(26,'Marte','12',3530),(27,'Libertad','123a',11000),(28,'Linares ','1123',9080),(29,'Benito Juarez','1123',6140),(30,'Las Aguilas','134',9470),(31,'Pozo 90','102',10040);
 /*!40000 ALTER TABLE `domicilio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +176,7 @@ CREATE TABLE `empleado` (
   PRIMARY KEY (`id_empleado`),
   KEY `fk_empleado_domicilio1_idx` (`id_domicilio`),
   CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`id_domicilio`) REFERENCES `domicilio` (`id_domicilio`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +185,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,'NURIA','AVILA','COLIN','AQW131WSS12SD1','AQW131WSS','55341234',1,5000,NULL),(2,'BRENDA','BLANCO','ALVAREZ','AMJ182NA131AJQ','AMJ182NA1','12543678',2,5000,NULL),(3,'ERICK','COLIN','CRUZ','EUWEUQ12NJS21J','EUWEUQ11','3459123',3,4000,NULL),(4,'PEDRO','CRUZ','CABALLERO','PEWQWQW12QDCD1','PEWQWQW12','02931231',4,6000,NULL),(5,'YAMIL OMAR','DELGADO','GONZALEZ','YOWQ12WQDQWQD1','YOWQ12WQD','293488132',5,5000,NULL),(6,'BLANCA LISET','FLORES','RAMIREZ','BLQSDQ12SQSSAD','BLQSDQ12S','273626363',6,7000,NULL),(7,'LINDA ISABEL','FUENTES','ANGELES','LISQASQ12SQS1A','LISQASQ12','382712312',7,7500,NULL),(8,'VICTOR IVAN','OLVERA','PADILLA','VI12J1NJNQNJQN','VI12J1NJ','92913949',8,7500,NULL),(9,'ARTURO','PACHECO','ANTONIO','AR192AJAN1N12JN1','AR192AJAN','9182831',9,6000,NULL),(10,'LUIS EDUARDO','SALCEDO','VAZQUEZ','LU12JM1N2WJ1NJ1','LU12JM1N2W','19239192',10,5500,NULL),(11,'OLIVER CARLOS','STREVEL','PEREZ','IL0181NBH1BJ2B1','IL0181NBH1','29172134',11,5500,NULL),(12,'FERNANDO','GOMEZ','MENESES','FENJ1NJANJ1NJN12W','FENJ1NJANJ','29192123',12,7500,NULL),(13,'AGUSTIN URIEL','ARVIZU','MENDOZA','AAJANJQNJHWNQNJ11','FENJ1NJAN','291731712',13,6500,NULL),(14,'JOSE ALEJANDRO','CRUZ','HERNANDEZ','JOQEMK12MKQMAKA','JOQEMK12','2312113213',14,6500,NULL),(15,'LUIS ALBERTO','BAUTISTA','MORA','LUDNJQNQUJ12NJN','LUDNJQNQUJ','98238312',15,7500,NULL),(16,'FRANCISCO JAVIER','DIAZ','HERNANDEZ','FRJNED1I2N2N1J','FRJNED1I','30986737',16,8500,NULL),(17,'JOSE ANTONIO','ESTRADA','PAVIA','JO1JSSMKAMKASM9','JO1JSSMKA','22818381',17,6500,NULL),(18,'HUGO MICHELLE','FLORES','MONDRAGON','HUQIWI1N2IAMIAAQ2','HUQIWI1N','21292199',18,7500,NULL),(19,'JOSE EDUARDO','FRAGOSO','COLIN','JEDNAQNJI12JANJQ11','JEDNAQNJ','293199232',19,7500,NULL),(20,'MIGUEL SHAMID','GALVAN','ARCE','MIAQMKM1JM121J21J','MIAQMKM1','927371717',20,7500,NULL),(23,'Karla','Camacho','Rivera','CARK960716MDFMVR02','CARK9607161Z8','5559409592',32,12000,4);
+INSERT INTO `empleado` VALUES (1,'NURIA','AVILA','COLIN','AQW131WSS12SD1','AQW131WSS','55341234',1,5000,NULL),(2,'BRENDA','BLANCO','ALVAREZ','AMJ182NA131AJQ','AMJ182NA1','12543678',2,5000,NULL),(3,'ERICK','COLIN','CRUZ','EUWEUQ12NJS21J','EUWEUQ11','3459123',3,4000,NULL),(4,'PEDRO','CRUZ','CABALLERO','PEWQWQW12QDCD1','PEWQWQW12','02931231',4,6000,NULL),(5,'YAMIL OMAR','DELGADO','GONZALEZ','YOWQ12WQDQWQD1','YOWQ12WQD','293488132',5,5000,NULL),(6,'BLANCA LISET','FLORES','RAMIREZ','BLQSDQ12SQSSAD','BLQSDQ12S','273626363',6,7000,NULL),(7,'LINDA ISABEL','FUENTES','ANGELES','LISQASQ12SQS1A','LISQASQ12','382712312',7,7500,NULL),(8,'VICTOR IVAN','OLVERA','PADILLA','VI12J1NJNQNJQN','VI12J1NJ','92913949',8,7500,NULL),(9,'ARTURO','PACHECO','ANTONIO','AR192AJAN1N12JN1','AR192AJAN','9182831',9,6000,NULL),(10,'LUIS EDUARDO','SALCEDO','VAZQUEZ','LU12JM1N2WJ1NJ1','LU12JM1N2W','19239192',10,5500,NULL),(11,'OLIVER CARLOS','STREVEL','PEREZ','IL0181NBH1BJ2B1','IL0181NBH1','29172134',11,5500,NULL),(12,'FERNANDO','GOMEZ','MENESES','FENJ1NJANJ1NJN12W','FENJ1NJANJ','29192123',12,7500,NULL),(13,'AGUSTIN URIEL','ARVIZU','MENDOZA','AAJANJQNJHWNQNJ11','FENJ1NJAN','291731712',13,6500,NULL),(14,'JOSE ALEJANDRO','CRUZ','HERNANDEZ','JOQEMK12MKQMAKA','JOQEMK12','2312113213',14,6500,NULL),(15,'LUIS ALBERTO','BAUTISTA','MORA','LUDNJQNQUJ12NJN','LUDNJQNQUJ','98238312',15,7500,NULL),(16,'FRANCISCO JAVIER','DIAZ','HERNANDEZ','FRJNED1I2N2N1J','FRJNED1I','30986737',16,8500,NULL),(17,'JOSE ANTONIO','ESTRADA','PAVIA','JO1JSSMKAMKASM9','JO1JSSMKA','22818381',17,6500,NULL),(18,'HUGO MICHELLE','FLORES','MONDRAGON','HUQIWI1N2IAMIAAQ2','HUQIWI1N','21292199',18,7500,NULL),(19,'JOSE EDUARDO','FRAGOSO','COLIN','JEDNAQNJI12JANJQ11','JEDNAQNJ','293199232',19,7500,NULL),(20,'MIGUEL SHAMID','GALVAN','ARCE','MIAQMKM1JM121J21J','MIAQMKM1','927371717',20,7500,NULL);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +214,7 @@ CREATE TABLE `empleado_status` (
 
 LOCK TABLES `empleado_status` WRITE;
 /*!40000 ALTER TABLE `empleado_status` DISABLE KEYS */;
-INSERT INTO `empleado_status` VALUES (1,1,'2017-02-25'),(2,1,'2017-02-25'),(3,2,'2017-02-25'),(4,1,'2017-02-25'),(5,1,'2017-02-25'),(6,1,'2017-02-25'),(7,1,'2017-01-03'),(8,1,'2017-02-25'),(9,1,'2017-02-25'),(10,1,'2017-02-25'),(11,1,'2017-02-25'),(12,1,'2017-02-25'),(13,1,'2017-01-24'),(14,2,'2017-02-25'),(15,1,'2017-02-25'),(16,1,'2017-02-25'),(17,2,'2017-02-25'),(18,1,'2017-02-25'),(19,1,'2017-02-25'),(20,1,'2017-01-13'),(23,1,'2017-03-21');
+INSERT INTO `empleado_status` VALUES (1,1,'2017-02-25'),(2,1,'2017-02-25'),(3,2,'2017-02-25'),(4,1,'2017-02-25'),(5,1,'2017-02-25'),(6,1,'2017-02-25'),(7,1,'2017-01-03'),(8,1,'2017-02-25'),(9,1,'2017-02-25'),(10,1,'2017-02-25'),(11,1,'2017-02-25'),(12,1,'2017-02-25'),(13,1,'2017-01-24'),(14,2,'2017-02-25'),(15,1,'2017-02-25'),(16,1,'2017-02-25'),(17,2,'2017-02-25'),(18,1,'2017-02-25'),(19,1,'2017-02-25'),(20,1,'2017-01-13');
 /*!40000 ALTER TABLE `empleado_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -489,7 +489,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,3,'nuria_12314@hotmail.com','nuria1',1),(2,1,'brendaloka_1990@hotmail.com','bren1',2),(3,3,'erickson_1990@hotmail.com','erick1',3),(4,2,'pedro_cruz@hotmail.com','pedro1',4),(5,3,'yamil_odel@hotmail.com','yam1',5),(6,3,'blanca_lisf@gmail.com','blanc1',6),(7,3,'lind_fue1@hotmail.com','linda1',7),(8,3,'vico_12334@hotmail.com','victor2',8),(9,2,'arturopache@hotmail.com','arturo1',9),(10,3,'salsa_eduardo@hotmail.com','eduardo1',10),(11,3,'oliver_atom@gmailcom','oliver1',11),(12,3,'fer_gomez123@hotmail.com','fernando1',12),(13,3,'agus_uri_arv@hotmail.com','agusti1',13),(14,3,'jose_alejo@hotmail.com','jose1',14),(15,2,'albert_baut@hotmail.com','alberto1',15),(16,3,'pancho_xavi@hotmail.com','francisco1',16),(17,3,'jose_antony12@hotmail.com','antonio1',17),(18,3,'michelle_hugo1@hotmail.com','hugo1',18),(19,3,'eduardo_fragoso@gmail.com','eduardo1',19),(20,3,'shamid_miguel@hotmail.com','miguel1',20),(23,3,'karlacamacho@gmail.com','karla123',23);
+INSERT INTO `usuario` VALUES (1,3,'nuria_12314@hotmail.com','nuria1',1),(2,1,'brendaloka_1990@hotmail.com','bren1',2),(3,3,'erickson_1990@hotmail.com','erick1',3),(4,2,'pedro_cruz@hotmail.com','pedro1',4),(5,3,'yamil_odel@hotmail.com','yam1',5),(6,3,'blanca_lisf@gmail.com','blanc1',6),(7,3,'lind_fue1@hotmail.com','linda1',7),(8,3,'vico_12334@hotmail.com','victor2',8),(9,2,'arturopache@hotmail.com','arturo1',9),(10,3,'salsa_eduardo@hotmail.com','eduardo1',10),(11,3,'oliver_atom@gmailcom','oliver1',11),(12,3,'fer_gomez123@hotmail.com','fernando1',12),(13,3,'agus_uri_arv@hotmail.com','agusti1',13),(14,3,'jose_alejo@hotmail.com','jose1',14),(15,2,'albert_baut@hotmail.com','alberto1',15),(16,3,'pancho_xavi@hotmail.com','francisco1',16),(17,3,'jose_antony12@hotmail.com','antonio1',17),(18,3,'michelle_hugo1@hotmail.com','hugo1',18),(19,3,'eduardo_fragoso@gmail.com','eduardo1',19),(20,3,'shamid_miguel@hotmail.com','miguel1',20);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -526,4 +526,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-21 10:38:38
+-- Dump completed on 2017-03-21 17:54:41

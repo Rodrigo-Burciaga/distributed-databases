@@ -25,10 +25,29 @@
 
 	$sqlborrar = "delete from domicilio where id_domicilio=$id_domicilio";
 	if(mysqli_query($conexion, $sqlborrar)){
-		echo "Eliminado Exitosamente";
+		$sqlborrar = "delete from empleado where id_empleado=$id";
+		if (mysqli_query($conexion, $sqlborrar)) {
+			$sqlborrar = "delete from empleado_status where id_empleado=$id";
+			if (mysqli_query($conexion, $sqlborrar)) {
+				$sqlborrar = "delete from usuario where empleado_id_empleado=$id";
+				if (mysqli_query($conexion, $sqlborrar)) {
+					echo "Empleado eliminado exitosamente!";
+				}
+				else{
+					echo "No se pudo eliminar el usuario: ". mysqli_error($conexion);
+				}
+			}
+			else{
+				echo "No se pudo eliminar el status: ". mysqli_error($conexion);
+
+			}
+		}
+		else{
+			echo "No se pudo eliminar empleado: " . mysqli_error($conexion);
+		}	
 	}
 	else{
-		echo "No se pudo eliminar: " . mysqli_error($conexion);
+		echo "No se pudo eliminar domicilio: " . mysqli_error($conexion);
 	}
 
 		

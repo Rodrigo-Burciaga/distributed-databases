@@ -20,9 +20,10 @@
 
             },
             function(data,status){ 
-            alert(data);                 
+            alert(data); 
+            window.location.reload();              
             });
-			//location.reload();
+			
 		}
 	</script>
 <title>Sneakerland | Tus Sneakers hablan por ti</title>

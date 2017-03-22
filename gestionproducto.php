@@ -11,15 +11,16 @@
 <link rel="stylesheet" type="text/css" href="css/estilos.css">
 <script src="js/jquery-1.8.2.min.js"></script> 
 <script type="text/javascript">
-		var sku;
 		function borrar(sku){
 			$.post("borrarprod.php",{
                 //parametros
                 comand: sku,
             },
-            function(data,status){                  
+            function(data,status){  
+            alert(data); 
+            window.location.reload();               
             });
-			location.reload();
+			
 		}
 </script>
 
