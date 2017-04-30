@@ -281,7 +281,7 @@ DROP TABLE IF EXISTS `producto`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `producto` (
   `sku` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre_producto` varchar(20) NOT NULL,
+  `nombre_producto` varchar(50) DEFAULT NULL,
   `descripcion` varchar(140) DEFAULT NULL,
   `precio` float NOT NULL,
   `foto` varchar(100) DEFAULT NULL,
@@ -529,4 +529,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-29 17:20:26
+-- Dump completed on 2017-04-30 17:18:40
